@@ -1,0 +1,21 @@
+.tab-container {
+    display: flex;
+    align-items: center;
+   
+    padding: 10px 5px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    .tab-icon {
+        width: 20px;
+        height: 20px;
+        margin: 0 20px;
+    }
+    .tab-text {
+        font-size: 0.8rem;
+    }
+}
+
+.selected {
+    background-color: var(--color-dark-gray);
+    color: #fff
+}

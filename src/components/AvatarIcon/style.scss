@@ -1,0 +1,16 @@
+
+.avatar-container {
+    display: flex;
+    align-items: center;
+    .display-name {
+        font-size: 0.8rem;
+        font-weight: 500;
+        margin-right: 10px;
+    }
+    .display-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }
+
+}
