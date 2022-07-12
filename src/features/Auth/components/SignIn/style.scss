@@ -1,0 +1,78 @@
+.auth-container {
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    transform: translateX(-50%);
+    text-align: center;
+    min-width: 510px;
+    .auth-welcome {
+        margin: 20px 0;
+        font-size: 0.8rem;
+    }
+    .auth-form {
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        padding: 20px;
+    }
+    .sign-in-with {
+        display: flex;
+        gap: 10px;
+        justify-content: space-between;
+    }
+    .sign-in-with-btn {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        color: var(--color-dark-gray);
+        background-color: #E5E5E5;
+        min-width: 250px;
+        font-size: 0.8rem;
+        padding: 10px 20px;
+        border-radius: 10px;
+        .sign-in-icon {
+            margin-right: 20px;
+        }
+    }
+   
+    h4 {
+        display: flex;
+        flex-direction: row;
+        margin: 20px 0;
+    }
+      
+    h4:before,
+    h4:after {
+        content: "";
+        flex: 1 1;
+        border-bottom: 1px solid var(--color-dark-gray);
+        margin: auto;
+    }
+    h4:before {
+        margin-right: 10px;
+    }
+    h4::after{
+        margin-left: 10px;
+    }
+    .sign-in-footer {
+        display: flex;
+        justify-content: space-between;
+        font-weight: 500;
+        font-size: 0.8rem;
+      
+        padding: 20px;
+        .remember-me-checkbox {
+            display: flex;
+            align-items: center;
+            input {
+                margin-right: 10px;
+            }
+        }
+    }
+    .no-account {
+        font-weight: 500;
+        font-size: 0.8rem;
+        margin-top: 20px;
+        a {
+            color: var(--color-blue);
+        }
+    }
+}

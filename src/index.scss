@@ -2,14 +2,17 @@
 
 :root {
   --font-main: 'Poppins', sans-serif;
-  --color-dark-gray: rgb(77, 60, 100)
+  --color-dark-gray: #515c77;
+  --color-blue: #4196fc;
 }
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  text-decoration: none;
 }
 body {
   font-family: var(--font-main);
+  color: var(--color-dark-gray);
   padding: 20px;
 }

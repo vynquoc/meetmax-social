@@ -3,18 +3,5 @@
     justify-content: space-between;
     align-self: center;
 }
-.logo-container {
-    display: flex;
-    align-items: center;
-    
-    .logo-icon {
-        width: 24px;
-        height: 24px;
-        margin-right: 8px;
-    }
-    .logo-text {
-        font-weight: 700;
-        color: var(--color-dark-gray)
-    }
-}
+
 
