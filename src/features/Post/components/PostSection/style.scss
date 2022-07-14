@@ -1,0 +1,9 @@
+.post-section {
+    display: flex;
+    background-color: var(--color-light-gray);
+    padding: 20px;
+    border-radius: 15px;
+    .post-list {
+        width: 65%;
+    }
+}

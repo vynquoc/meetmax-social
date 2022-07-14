@@ -1,0 +1,28 @@
+.content-form-container {
+    width: 500px;
+    .input-section {
+        display: flex;
+        margin-top: 10px;
+        div {
+            align-self: flex-start;
+            margin-right: 15px;
+        }
+        textarea {
+            min-height: 100px;
+            border: none;
+            background-color: var(--color-light-gray);
+            width: 100%;
+            border-radius: 10px;
+            padding: 10px;
+            outline: none;
+            font-family: var(--font-main);
+        }
+    }
+    .submit-section {
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+    
+}

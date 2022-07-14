@@ -1,0 +1,17 @@
+.create-post-container {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 15px;
+    .post-input {
+        display: flex;
+        align-items: center;
+        p {
+            background-color: var(--color-light-gray);
+            margin-left: 10px;
+            width: 100%;
+            font-size: 0.8rem;
+            padding: 10px;
+            border-radius: 10px;
+        }
+    }
+}
