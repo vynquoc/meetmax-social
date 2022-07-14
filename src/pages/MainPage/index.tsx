@@ -4,7 +4,7 @@ import './style.scss';
 import Header from '../../components/Header';
 import SideBar from '../../components/SideBar';
 import FriendList from '../../components/FriendList';
-import Posts from '../../features/Post/components/PostList';
+import PostSection from '../../features/Post/components/PostSection';
 
 const MainPage = () => {
   return (
@@ -12,7 +12,7 @@ const MainPage = () => {
       <Header />
       <div className="main-container">
         <SideBar />
-        <Posts />
+        <PostSection />
         <FriendList />
       </div>
     </div>

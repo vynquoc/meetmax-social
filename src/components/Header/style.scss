@@ -2,6 +2,18 @@
     display: flex;
     justify-content: space-between;
     align-self: center;
+    .sign-in {
+        display: flex;
+        align-items: center;
+        color: var(--color-dark-gray);
+        &-icon {
+            font-size: 1.4rem;
+            margin-right: 5px;
+        }
+        span {
+            font-size: 0.8rem;
+        }
+    }
 }
 
 

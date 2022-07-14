@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './style.scss';
+import { AuthContext } from '../../contexts/authContext/AuthContext';
 //icons
 import {
   BiSpreadsheet,
@@ -43,19 +44,19 @@ const tabs = [
     icon: <BiCog />,
     text: 'Settings',
   },
-  {
-    icon: <BiLogOut />,
-    text: 'Logout',
-  },
 ];
 
 const SideBar = () => {
+  const authContext = useContext(AuthContext);
+  const { signOut } = authContext;
+
   return (
     <div className="sidebar">
       <div className="tabs-container">
         {tabs.map((tab, index) => (
-          <Tab icon={tab.icon} text={tab.text} />
+          <Tab key={index} icon={tab.icon} text={tab.text} />
         ))}
+        <Tab icon={<BiLogOut />} text="Logout" onClick={signOut} />
       </div>
     </div>
   );

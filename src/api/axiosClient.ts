@@ -1,14 +1,14 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from "axios";
 
 const axiosClient = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: 'http://localhost:8000/api',
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
 axiosClient.interceptors.request.use(
-  function (config) {
+  function (config: any) {
     // Do something before request is sent
     const accessToken = localStorage.getItem('access_token');
     if (accessToken) {
@@ -16,7 +16,7 @@ axiosClient.interceptors.request.use(
     }
     return config;
   },
-  function (error) {
+  function (error: any) {
     // Do something with request error
     return Promise.reject(error);
   }
