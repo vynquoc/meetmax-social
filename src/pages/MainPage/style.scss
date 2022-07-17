@@ -1,4 +1,11 @@
 .main-container {
     display: grid;
-    grid-template-columns: 300px 1fr 200px;
+    grid-template-columns: 300px 1fr 250px;
+    gap: 20px;
+    .main-section {
+        margin-top: 20px;
+        border-radius: 15px;
+        padding: 20px;
+        background-color: var(--color-light-gray);
+    }
 }

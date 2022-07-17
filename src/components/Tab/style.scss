@@ -1,7 +1,7 @@
 .tab-container {
     display: flex;
     align-items: center;
-   
+    color: var(--color-dark-gray);
     padding: 10px 5px;
     margin-bottom: 10px;
     border-radius: 10px;
@@ -13,6 +13,20 @@
     }
     .tab-text {
         font-size: 0.8rem;
+    }
+    .count {
+        margin-left: auto;
+        font-size: 0.7rem;
+        padding: 3px;
+        height: 15px;
+        width: 15px;
+        margin-right: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        background-color: red;
+        color: #fff;
     }
 }
 

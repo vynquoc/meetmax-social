@@ -5,17 +5,22 @@ import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 //providers
-import { AuthProvider } from './contexts/authContext/AuthContext';
-import { ModalProvider } from './contexts/modalContext/ModalContext';
-
+import { AuthProvider } from './contexts/AuthContext';
+import { ModalProvider } from './contexts/ModalContext';
+import { SocketProvider } from './contexts/SocketContext';
+import { NotificationProvider } from './contexts/NotificationContext/NotificationContext';
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <AuthProvider>
-    <ModalProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ModalProvider>
+    <SocketProvider>
+      <NotificationProvider>
+        <ModalProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ModalProvider>
+      </NotificationProvider>
+    </SocketProvider>
   </AuthProvider>
 );
 

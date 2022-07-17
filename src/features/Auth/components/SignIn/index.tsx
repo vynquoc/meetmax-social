@@ -2,7 +2,7 @@ import './style.scss';
 import React, { useEffect, useState, useContext } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 //contexts
-import { AuthContext } from '../../../../contexts/authContext/AuthContext';
+import { AuthContext } from '../../../../contexts/AuthContext';
 //components
 import Button from '../../../../components/Button';
 import TextInput from '../../../../components/TextInput';

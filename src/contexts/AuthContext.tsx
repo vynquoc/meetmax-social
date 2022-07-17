@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 
-import authApi from '../../api/authApi';
+import authApi from '../api/authApi';
 
 interface AuthContextProps {
   children: React.ReactNode;
@@ -16,6 +16,7 @@ interface User {
   gender: string;
   dateOfBirth: string;
   email: string;
+  friends: [User];
 }
 
 interface AuthContextDefault {

@@ -5,6 +5,7 @@
   --color-dark-gray: #515c77;
   --color-light-gray: #F6F6F9;
   --color-blue: #4196fc;
+  --color-green: #00CF83;
 }
 * {
   margin: 0;
@@ -16,4 +17,10 @@ body {
   font-family: var(--font-main);
   color: var(--color-dark-gray);
   padding: 20px;
+}
+
+hr {
+  display: block; height: 1px;
+  border: 0; border-top: 1px solid #ccc;
+  margin: 0; padding: 0;
 }

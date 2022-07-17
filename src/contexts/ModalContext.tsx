@@ -1,6 +1,6 @@
 import { createContext, ReactNode } from 'react';
-import useModal from '../../hooks/useModal';
-import Modal from '../../components/Modal';
+import useModal from '../hooks/useModal';
+import Modal from '../components/Modal';
 interface ModalProviderProps {
   children: React.ReactNode;
 }

@@ -5,7 +5,7 @@ import TextInput from '../../../../components/TextInput';
 import PostContentForm from '../PostContentForm';
 
 import { useContext } from 'react';
-import { ModalContext } from '../../../../contexts/modalContext/ModalContext';
+import { ModalContext } from '../../../../contexts/ModalContext';
 
 const CreatePost: React.FC = () => {
   const { handleToggleModal } = useContext(ModalContext);

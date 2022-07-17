@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
-import { AuthContext } from '../../contexts/authContext/AuthContext';
+import { AuthContext } from '../../contexts/AuthContext';
 import './style.scss';
 
 interface AvatarIconProps {
   showName?: boolean;
+  avatarUrl?: string;
 }
 
-const AvatarIcon = ({ showName }: AvatarIconProps) => {
+const AvatarIcon = ({ showName, avatarUrl }: AvatarIconProps) => {
   const authContext = useContext(AuthContext);
   const { currentUser } = authContext;
   return (
@@ -14,7 +15,11 @@ const AvatarIcon = ({ showName }: AvatarIconProps) => {
       {showName && (
         <span className="display-name">{currentUser?.firstName + ' ' + currentUser?.lastName}</span>
       )}
-      <img className="display-avatar" src={currentUser?.avatar} alt="avatar" />
+      <img
+        className="display-avatar"
+        src={avatarUrl ? avatarUrl : currentUser?.avatar}
+        alt="avatar"
+      />
     </div>
   );
 };

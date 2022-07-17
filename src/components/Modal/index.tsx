@@ -1,7 +1,7 @@
 import React, { ReactNode, useContext } from 'react';
 import ReactDOM from 'react-dom';
 
-import { ModalContext } from '../../contexts/modalContext/ModalContext';
+import { ModalContext } from '../../contexts/ModalContext';
 import { BiXCircle } from 'react-icons/bi';
 import './style.scss';
 

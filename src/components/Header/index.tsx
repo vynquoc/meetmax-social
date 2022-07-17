@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import './style.scss';
-import { AuthContext } from '../../contexts/authContext/AuthContext';
+import { AuthContext } from '../../contexts/AuthContext';
 import { NavLink } from 'react-router-dom';
 //component
 import SearchBar from '../SearchBar';
@@ -14,7 +14,7 @@ const Header = () => {
   return (
     <div className="header-container">
       <Logo />
-      <SearchBar />
+      <SearchBar placeholder="Searh for somethings" />
 
       {currentUser ? (
         <AvatarIcon showName />

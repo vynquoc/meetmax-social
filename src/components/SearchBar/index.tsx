@@ -1,11 +1,15 @@
 import React from 'react';
 import { BiSearch } from 'react-icons/bi';
 import './style.scss';
-const SearchBar = () => {
+
+interface SearchBarProps {
+  placeholder: string;
+}
+const SearchBar = ({ placeholder }: SearchBarProps) => {
   return (
     <div className="search-bar-container">
       <BiSearch className="search-icon" />
-      <input placeholder="Search for somethings here..." />
+      <input placeholder={placeholder} />
     </div>
   );
 };
