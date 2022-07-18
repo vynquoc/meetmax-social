@@ -2,29 +2,41 @@ import React, { useContext, useEffect, useState } from 'react';
 import moment from 'moment';
 import notificationApi from '../../../../api/notificationApi';
 import commentApi from '../../../../api/commentApi';
+import postApi from '../../../../api/postApi';
+import { SocketContext } from '../../../../contexts/SocketContext';
+import { PostListContext } from '../../../../contexts/PostListContext/PostListContext';
+import { AuthContext } from '../../../../contexts/AuthContext';
 import './style.scss';
 import { BiLike, BiComment, BiShare, BiSend } from 'react-icons/bi';
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
-import { SocketContext } from '../../../../contexts/SocketContext';
 //components
 import AvatarIcon from '../../../../components/AvatarIcon';
 import TextInput from '../../../../components/TextInput';
 import CommentList from '../CommentList';
 
 const Post = ({ post }: any) => {
+  const { socket } = useContext(SocketContext);
+  const { currentUser } = useContext(AuthContext);
+  const { dispatch } = useContext(PostListContext);
+
+  const { postedBy, likedBy, createdAt, numsLike, photo, comments, id } = post;
+
   const [content, setContent] = useState('');
   const [commentList, setCommentList] = useState([]);
   const [commentCount, setCommentCount] = useState(post.numsComment);
-  const { socket } = useContext(SocketContext);
-  const { postedBy, createdAt, numsLike, photo, comments } = post;
 
   const handleContentChange = (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
-
     setContent(value);
   };
-
-  const handleSubmit = async () => {
+  const handleLike = async () => {
+    try {
+      const { updatedPost }: any = await postApi.unlike(id);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleSubmitComment = async () => {
     try {
       const response: any = await commentApi.create({ content, post: post.id });
       const newCommentList: any = [response.newComment, ...commentList];
@@ -73,15 +85,15 @@ const Post = ({ post }: any) => {
         </div>
         <hr />
         <div className="post-like-comment-action">
-          <div>
+          <div onClick={handleLike} className={'action-button'}>
             <BiLike />
             <span>Like</span>
           </div>
-          <div>
+          <div className="action-button">
             <BiComment />
             <span>Comment</span>
           </div>
-          <div>
+          <div className="action-button">
             <BiShare />
             <span>Share</span>
           </div>
@@ -97,7 +109,7 @@ const Post = ({ post }: any) => {
           onChange={handleContentChange}
           value={content}
         />
-        <div className="submit-button" onClick={handleSubmit}>
+        <div className="submit-button" onClick={handleSubmitComment}>
           <BiSend className="submit-button-inner" />
         </div>
       </div>

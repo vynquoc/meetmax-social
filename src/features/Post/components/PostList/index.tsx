@@ -1,24 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import postApi from '../../../../api/postApi';
+import { PostListContext } from '../../../../contexts/PostListContext/PostListContext';
 //componets
 import Post from '../Post';
 
 const PostList = () => {
-  const [posts, setPosts] = useState([]);
+  const { postList, dispatch } = useContext(PostListContext);
   const getPostList = async () => {
     try {
       const { postList }: any = await postApi.getPostList();
-      setPosts(postList);
+      dispatch({ type: 'GET_POST_LIST', payload: { postList } });
     } catch (error) {
       console.log(error);
     }
   };
+
   useEffect(() => {
     getPostList();
   }, []);
   return (
     <div>
-      {posts.map((post: any) => (
+      {postList.map((post: any) => (
         <Post key={post._id} post={post} />
       ))}
     </div>

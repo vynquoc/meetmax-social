@@ -8,6 +8,7 @@ import reportWebVitals from './reportWebVitals';
 import { AuthProvider } from './contexts/AuthContext';
 import { ModalProvider } from './contexts/ModalContext';
 import { SocketProvider } from './contexts/SocketContext';
+import { PostListProvider } from './contexts/PostListContext/PostListContext';
 import { NotificationProvider } from './contexts/NotificationContext/NotificationContext';
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
@@ -15,9 +16,11 @@ root.render(
     <SocketProvider>
       <NotificationProvider>
         <ModalProvider>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
+          <PostListProvider>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </PostListProvider>
         </ModalProvider>
       </NotificationProvider>
     </SocketProvider>
