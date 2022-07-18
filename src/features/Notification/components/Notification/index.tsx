@@ -11,9 +11,11 @@ const Notification = ({ notification }: any) => {
   const { createdBy, createdAt, content, type, isRead, id } = notification;
   const { state, dispatch } = useContext(NotificationContext);
   const handleClick = async () => {
-    const { newNotification }: any = await notificationApi.update(id);
+    if (!isRead) {
+      const { newNotification }: any = await notificationApi.update(id);
 
-    dispatch({ type: 'UPDATE_NOTIFICATION', payload: { notification: newNotification } });
+      dispatch({ type: 'UPDATE_NOTIFICATION', payload: { notification: newNotification } });
+    }
   };
   return (
     <div className="notification-container" onClick={handleClick}>
