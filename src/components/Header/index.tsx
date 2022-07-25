@@ -14,7 +14,7 @@ const Header = () => {
   return (
     <div className="header-container">
       <Logo />
-      <SearchBar placeholder="Searh for somethings" />
+      <SearchBar placeholder="Search for somethings" />
 
       {currentUser ? (
         <AvatarIcon showName />

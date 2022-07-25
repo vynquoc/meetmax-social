@@ -19,7 +19,7 @@ const FriendSuggestion = () => {
         <div className="suggestion-user-container">
           <img className="user-avatar" src={user.avatar} alt="avatar" />
           <div className="name">
-            <NavLink to={`/${user.username}`} className="user-name">
+            <NavLink to={`/profile/${user.username}`} className="user-name">
               {user.firstName + ' ' + user.lastName}
             </NavLink>
             <span className="user-username">{'@' + user.username}</span>

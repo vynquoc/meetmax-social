@@ -15,13 +15,13 @@ root.render(
   <AuthProvider>
     <SocketProvider>
       <NotificationProvider>
-        <ModalProvider>
-          <PostListProvider>
-            <BrowserRouter>
+        <PostListProvider>
+          <BrowserRouter>
+            <ModalProvider>
               <App />
-            </BrowserRouter>
-          </PostListProvider>
-        </ModalProvider>
+            </ModalProvider>
+          </BrowserRouter>
+        </PostListProvider>
       </NotificationProvider>
     </SocketProvider>
   </AuthProvider>

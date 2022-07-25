@@ -1,0 +1,40 @@
+.friend-item {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    height: fit-content;
+    &-info {
+        display: flex;
+       &-name {
+        margin-left: 10px;
+        p:first-child {
+            font-size: 0.9rem;
+        }
+        p:nth-child(2) {
+            font-size: 0.8rem;
+        }
+       }
+    }
+    &-action {
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+
+        .friend-item-button {
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .view-button {
+            background-color: var(--color-blue);
+            color: #fff;
+           
+        }
+        .unfriend-button {
+            border: 0;
+            color: var(--color-dark-gray);
+            cursor: pointer;
+        }
+    }
+}

@@ -16,7 +16,7 @@ interface User {
   gender: string;
   dateOfBirth: string;
   email: string;
-  friends: [User];
+  friends: [any];
 }
 
 interface AuthContextDefault {

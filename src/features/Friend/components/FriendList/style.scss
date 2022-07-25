@@ -1,35 +1,9 @@
-.friend-list-container {
-    .friend-list-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin: 20px 0;
-        .dots-icon {
-            font-size: 1.5rem;
-        }
-        
-    }
-    .friend-container {
-        display: flex;
-        align-items: center;
-        
-        .friend-avatar {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-        }
-        .friend-name {
-            font-size: 0.8rem;
-            margin: 0 20px;
-           
-        }
-        .friend-status {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: var(--color-green);
-            margin-left: auto;
-        }
-    }
+.friend-list {
+    display: grid;
+    grid-template-columns: repeat(4, 190px);
+    gap: 20px;
+    margin-top: 20px;
+    min-height: 650px;
+    max-height: 650px;
+   
 }

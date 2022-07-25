@@ -1,0 +1,20 @@
+.post-detail-container {
+    display: grid;
+    grid-template-columns: 8fr 4fr;
+    gap: 15px;
+    margin-top: -20px;
+    padding: 15px;
+    max-width: 1200px;
+    .post-img {
+        width: 100%;
+    }
+   .post-detail-info {
+    &-name {
+        display: flex;
+        font-size: 0.8rem;
+    }
+    &-content {
+        font-size: 0.9rem;
+    }
+   }
+}

@@ -24,7 +24,7 @@ const tabs = [
   {
     icon: <FiUsers />,
     text: 'My Community',
-    path: '/community',
+    path: '/community?tab=friends',
   },
   {
     icon: <BiMessageDetail />,

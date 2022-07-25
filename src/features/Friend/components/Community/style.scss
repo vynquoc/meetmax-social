@@ -1,0 +1,24 @@
+.community-container {
+   
+    .tab-panel {
+        display: flex;
+        gap: 10px;
+        background-color: #fff;
+        padding: 10px 10px;
+        border-radius: 15px;
+        .tab {
+            border: 1px solid var(--color-dark-gray);
+            flex: 1;
+            padding: 5px 10px;
+            text-align: center;
+            font-size: 0.8rem;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .tab-active {
+            background-color: var(--color-blue);
+            color: #fff;
+            border-color: var(--color-blue);
+        }
+    }
+}

@@ -1,6 +1,9 @@
 import axiosClient from "./axiosClient";
 
 const friendRequestApi = {
+    getAll: () => {
+        return axiosClient.get("/friend-request/get-all")
+    },
     sendRequest: (recepient: string) => {
         return axiosClient.post("/friend-request/create", {recepient})
     },

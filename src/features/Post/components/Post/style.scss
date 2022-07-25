@@ -58,28 +58,7 @@
         }
 
     }
-    .comment-input {
-        display: flex;
-        margin-top: 10px;
-        align-items: center;
-        div:nth-child(2) {
-            width: 100%;
-            margin-left: 10px;
-        }
-        .submit-button {
-            font-size: 1.5rem;
-            background-color: #E8F2FF;
-            display: flex;
-            align-items: center;
-            margin-left: 10px;
-            padding:5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            &-inner {
-               color: #1181FF
-            }
-        }
-    }
+   
     .comment-list {
         .comment-item {
             display: flex;

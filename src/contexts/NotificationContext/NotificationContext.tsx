@@ -27,7 +27,12 @@ export const NotificationProvider = ({ children }: NotificationProviderProps) =>
   useEffect(() => {
     if (currentUser) {
       getNotificationList();
-      socket.on('push-notification', (notification: any) => {
+
+      socket.on('push-comment-notification', (notification: any) => {
+        dispatch({ type: 'UPDATE_NOTIFICATION_LIST', payload: { newNotification: notification } });
+      });
+
+      socket.on('push-like-notification', (notification: any) => {
         dispatch({ type: 'UPDATE_NOTIFICATION_LIST', payload: { newNotification: notification } });
       });
     }

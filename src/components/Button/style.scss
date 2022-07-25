@@ -9,3 +9,8 @@
     border: 0;
     cursor: pointer;
 }
+
+.inverted {
+    background-color: var(--color-light-gray);
+    color: var(--color-dark-gray);
+}

@@ -5,7 +5,9 @@ import React, { useState } from "react";
     const [modalContent, setModalContent] = useState(null)
     const handleToggleModal = (content: any) => {
         setModal(!modal)
-        setModalContent(content)
+        if (content) {
+            setModalContent(content)
+        }
     }
 
     return {modal, handleToggleModal, modalContent}

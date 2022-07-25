@@ -1,16 +1,22 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import moment from 'moment';
+
 import './style.scss';
 import { AiFillLike, AiFillMessage } from 'react-icons/ai';
 import { BsDot } from 'react-icons/bs';
 import AvatarIcon from '../../../../components/AvatarIcon';
 import { NotificationContext } from '../../../../contexts/NotificationContext/NotificationContext';
 import notificationApi from '../../../../api/notificationApi';
+import PostDetail from '../../../Post/components/PostDetail';
+import { ModalContext } from '../../../../contexts/ModalContext';
 
 const Notification = ({ notification }: any) => {
-  const { createdBy, createdAt, content, type, isRead, id } = notification;
-  const { state, dispatch } = useContext(NotificationContext);
+  const { createdBy, createdAt, content, type, isRead, id, url } = notification;
+  const { dispatch } = useContext(NotificationContext);
+  const { handleToggleModal } = useContext(ModalContext);
+
   const handleClick = async () => {
+    handleToggleModal(<PostDetail postId={url} />);
     if (!isRead) {
       const { newNotification }: any = await notificationApi.update(id);
 

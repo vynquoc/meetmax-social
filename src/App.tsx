@@ -7,7 +7,7 @@ import { SocketContext } from './contexts/SocketContext';
 import Authentication from './features/Auth/pages';
 import MainPage from './pages/MainPage';
 import FriendPage from './features/Friend/pages/FriendProfile';
-import NotificationSection from './features/Notification/components/NotificationSection';
+
 //components
 
 function App() {
@@ -24,9 +24,7 @@ function App() {
       <Routes>
         <Route path="auth/*" element={<Authentication />} />
         <Route path="profile/:username" element={<FriendPage />} />
-        <Route path="/" element={<MainPage />}>
-          <Route path="notifications" element={<NotificationSection />} />
-        </Route>
+        <Route path="*" element={<MainPage />} />
       </Routes>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { ReactNode, useContext } from 'react';
+import { useContext } from 'react';
 import ReactDOM from 'react-dom';
 
 import { ModalContext } from '../../contexts/ModalContext';
@@ -11,9 +11,11 @@ const Modal = () => {
     return ReactDOM.createPortal(
       <div className="modal-container">
         <div className="content-container">
-          <button className="close-modal-button" onClick={() => handleToggleModal(null)}>
-            <BiXCircle className="close-icon" />
-          </button>
+          {
+            <button className="close-modal-button" onClick={() => handleToggleModal(null)}>
+              <BiXCircle className="close-icon" />
+            </button>
+          }
           <div className="modal-content">{modalContent}</div>
         </div>
       </div>,

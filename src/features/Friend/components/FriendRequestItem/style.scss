@@ -1,0 +1,48 @@
+.request-item {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    height: fit-content;
+    &-info {
+        display: flex;
+       &-name {
+        margin-left: 10px;
+        p:first-child {
+            font-size: 0.9rem;
+        }
+        p:nth-child(2) {
+            font-size: 0.8rem;
+        }
+       }
+    }
+    &-action {
+        margin-top: 10px;
+        display: flex;
+        gap: 10px;
+
+        .request-item-button {
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            border-radius: 5px;
+            margin-top: 10px;
+            flex: 1;
+            text-align: center;
+        }
+        .accept-button {
+            background-color: var(--color-blue);
+            border: 0;
+            color: var(--color-dark-gray);
+            color: #fff;
+           
+        }
+        .decline-button {
+            border: 0;
+            color: var(--color-dark-gray);
+            cursor: pointer;
+        }
+        .action-message {
+            background-color: var(--color-light-gray);
+            cursor: unset ;
+        }
+    }
+}

@@ -1,0 +1,17 @@
+.chat-container {
+    padding: 10px;
+    position: relative;
+    background-color: #fff;
+    border-radius: 15px;
+hr {
+    display: block; height: 1px;
+    border: 0; border-top: 1px solid #ddd;
+    margin: 0; padding: 0;
+  }
+    &-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+  
+}

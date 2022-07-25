@@ -9,11 +9,14 @@ const postApi = {
     create: (data: Post) => {
         return axiosClient.post("/post/create", data)
     },
-    addLike: (data: string) => {
-        return axiosClient.patch(`/post/${data}/like`)
+    getPostDetail: (id: string) => {
+        return axiosClient.get(`/post/${id}`)
     },
-    unlike: (data: string) => {
-        return axiosClient.patch(`/post/${data}/unlike`)
+    addLike: (id: string) => {
+        return axiosClient.patch(`/post/${id}/like`)
+    },
+    unlike: (id: string) => {
+        return axiosClient.patch(`/post/${id}/unlike`)
     },
     getPostList: () => {
         return axiosClient.get("/post/getPostList")
