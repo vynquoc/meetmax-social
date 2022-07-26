@@ -13,10 +13,11 @@ interface TabProps {
 const Tab = ({ icon, text, onClick, path }: TabProps) => {
   const { pathname } = useLocation();
   const { notificationList } = useContext(NotificationContext);
-  console.log(pathname.split('?'));
+
   const count = notificationList.filter(
     (notification: any) => notification.isRead === false
   ).length;
+
   return (
     <NavLink
       to={path}

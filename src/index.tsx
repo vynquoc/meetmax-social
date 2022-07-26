@@ -10,17 +10,20 @@ import { ModalProvider } from './contexts/ModalContext';
 import { SocketProvider } from './contexts/SocketContext';
 import { PostListProvider } from './contexts/PostListContext/PostListContext';
 import { NotificationProvider } from './contexts/NotificationContext/NotificationContext';
+import { ConversationProvider } from './contexts/ConversationContext/ConversationContext';
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <AuthProvider>
     <SocketProvider>
       <NotificationProvider>
         <PostListProvider>
-          <BrowserRouter>
-            <ModalProvider>
-              <App />
-            </ModalProvider>
-          </BrowserRouter>
+          <ConversationProvider>
+            <BrowserRouter>
+              <ModalProvider>
+                <App />
+              </ModalProvider>
+            </BrowserRouter>
+          </ConversationProvider>
         </PostListProvider>
       </NotificationProvider>
     </SocketProvider>

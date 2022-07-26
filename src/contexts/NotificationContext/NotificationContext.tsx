@@ -19,6 +19,7 @@ export const NotificationProvider = ({ children }: NotificationProviderProps) =>
   const [state, dispatch] = useReducer(notificationReducer, DefaultData.notifications);
   const { currentUser } = useContext(AuthContext);
   const { socket } = useContext(SocketContext);
+
   const getNotificationList = async () => {
     const { notificationList }: any = await notificationApi.getNotificationList();
     dispatch({ type: 'GET_NOTIFICATION_LIST', payload: { notificationList } });

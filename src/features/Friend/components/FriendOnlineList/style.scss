@@ -12,7 +12,9 @@
     .friend-container {
         display: flex;
         align-items: center;
-        
+        cursor: pointer;
+        padding: 10px;
+        border-radius: 5px;
         .friend-avatar {
             width: 35px;
             height: 35px;
@@ -30,6 +32,9 @@
             font-size: 2rem;
             color: var(--color-green);
             margin-left: auto;
+        }
+        &:hover {
+            background-color: var(--color-light-gray);
         }
     }
 }

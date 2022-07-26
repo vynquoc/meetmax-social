@@ -1,23 +1,20 @@
+import { useContext, useEffect } from 'react';
+import { ConversationContext } from '../../../../contexts/ConversationContext/ConversationContext';
 import './style.scss';
 //components
 import SearchBar from '../../../../components/SearchBar';
 import Conversation from '../Conversation';
 
 const ConversationList = () => {
+  const { conversationList, dispatch } = useContext(ConversationContext);
+
   return (
     <div className="conversation-list-container">
       <SearchBar placeholder="Search" />
       <br />
-      <Conversation />
-      <Conversation />
-
-      <Conversation />
-
-      <Conversation />
-
-      <Conversation />
-
-      <Conversation />
+      {conversationList.map((conversation: any) => {
+        return <Conversation key={conversation.id} conversation={conversation} />;
+      })}
     </div>
   );
 };
