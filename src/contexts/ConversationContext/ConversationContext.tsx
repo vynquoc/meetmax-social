@@ -21,12 +21,13 @@ export const ConversationProvider = ({ children }: ConversationProviderProps) =>
 
   const getConversationList = async () => {
     const { conversations }: any = await conversationApi.getConversations();
+
     dispatch({ type: 'GET_CONVERSATION_LIST', payload: { conversationList: conversations } });
   };
 
   useEffect(() => {
     getConversationList();
-  }, [currentUser]);
+  }, [currentUser, dispatch]);
   const { conversationList, currentConversation } = state;
   const value = { conversationList, currentConversation, dispatch };
   return <ConversationContext.Provider value={value}>{children}</ConversationContext.Provider>;

@@ -7,10 +7,21 @@ export const conversationReducer = (state:any = [], action: any) => {
                 ...state, 
                 conversationList: payload.conversationList
             }
+      
         case 'SET_CURRENT_CONVERSATION':
-            return {
-                ...state,
-                currentConversation: payload.conversation
+            const existedConversation = state.conversationList.find((conversation: any) => conversation.id === payload.conversation.id)
+            if (existedConversation) {
+                return {
+                    ...state,
+                    currentConversation: payload.conversation
+                }
+            } else {
+                const updatedConversationList = [payload.conversation, ...state.conversationList]
+                return {
+                    ...state,
+                    currentConversation: payload.conversation,
+                    conversationList: updatedConversationList
+                }
             }
         case 'UPDATE_CONVERSATION':
             const updatedList = state.conversationList.map((conversation: any) => {

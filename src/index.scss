@@ -12,7 +12,12 @@
   padding: 0;
   box-sizing: border-box;
   text-decoration: none;
+  scrollbar-width: thin;
 }
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
 body {
   font-family: var(--font-main);
   color: var(--color-dark-gray);
@@ -30,3 +35,4 @@ hr {
 a {
   color: var(--color-dark-gray)
 }
+

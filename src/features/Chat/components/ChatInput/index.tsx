@@ -11,7 +11,7 @@ const ChatInput = ({ content, onContentChange, onSubmitChat }: ChatInputProps) =
   return (
     <div className="chat-input-container">
       <div className="chat-input">
-        <input onChange={onContentChange} />
+        <input onChange={onContentChange} value={content} />
         <div className="chat-input-icon">
           <GrAttachment />
           <MdTagFaces />

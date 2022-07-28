@@ -20,7 +20,7 @@ const Post = ({ post }: any) => {
   const { socket } = useContext(SocketContext);
   const { currentUser } = useContext(AuthContext);
   const { dispatch } = useContext(PostListContext);
-
+  console.log(post);
   const [liked, setLiked] = useState(false);
   const { postedBy, likedBy, createdAt, photo, comments, id } = post;
   const [content, setContent] = useState('');

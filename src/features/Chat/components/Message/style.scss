@@ -1,0 +1,36 @@
+.message {
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+    font-size: 0.7rem;
+    max-width: fit-content;
+    .message-content {
+        background-color: var(--color-light-gray);
+        padding: 5px;
+        border-radius: 5px;
+        max-width: 200px;
+        word-wrap: break-word;
+    }
+    .message-content.darker {
+        background-color: var(--color-blue);
+        color: #fff;
+    }
+    .message-avatar {
+        align-self: flex-end;
+    
+        img {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    }
+}
+
+.right {
+    margin-left: auto;
+}
+
+.left {
+    margin-right: auto;
+}

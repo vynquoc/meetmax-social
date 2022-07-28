@@ -10,9 +10,10 @@ const conversationApi = {
     },
     getConversations: () => {
         return axiosClient.get("/conversation/get-conversations")
+    },
+    getConversation: (data: conversationData) => {
+        return axiosClient.post("/conversation/get-conversation", data)
     }
-    
-    
 }
 
 export default conversationApi

@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import moment from 'moment';
 import AvatarIcon from '../../../../components/AvatarIcon';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../../contexts/AuthContext';
 import { ConversationContext } from '../../../../contexts/ConversationContext/ConversationContext';
 import './style.scss';
@@ -8,10 +9,12 @@ import './style.scss';
 const Conversation = ({ conversation }: any) => {
   const { currentUser } = useContext(AuthContext);
   const { currentConversation, dispatch } = useContext(ConversationContext);
+  const navigate = useNavigate();
   const [friend, setFriend] = useState<any>(null);
 
   const handleSelectConversation = () => {
     dispatch({ type: 'SET_CURRENT_CONVERSATION', payload: { conversation } });
+    navigate(`/messages?conversationId=${conversation.id}`);
   };
 
   useEffect(() => {
@@ -36,9 +39,11 @@ const Conversation = ({ conversation }: any) => {
         </div>
         <div className="conversation-info-timestamp">
           <span className="conversation-info-time">
-            {conversation.lastMessage ? moment(conversation.lastMessage.createdAt).fromNow() : ''}
+            {conversation.lastMessage
+              ? moment(conversation.lastMessage.createdAt).format('LT')
+              : ''}
           </span>
-          <span className="conversation-info-noti">1</span>
+          {/* <span className="conversation-info-noti">1</span> */}
         </div>
       </div>
     </div>
