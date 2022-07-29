@@ -31,6 +31,14 @@ export const conversationReducer = (state:any = [], action: any) => {
                 ...state,
                 conversationList: updatedList
             }
+        case 'UPDATE_LAST_MESSAGE':
+            const newList = state.conversationList.map((conversation: any) => {
+                return conversation.id === payload.message.conversation ? {...conversation, lastMessage: payload.message} : conversation
+            })
+            return {
+                ...state,
+                conversationList: newList
+            }
     
 
       default:

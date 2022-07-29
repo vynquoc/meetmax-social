@@ -55,7 +55,7 @@ const tabs = [
 
 const SideBar = () => {
   const { signOut } = useContext(AuthContext);
-
+  console.log('CPN SideBar');
   return (
     <div className="sidebar">
       <div className="tabs-container">

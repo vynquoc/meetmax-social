@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useEffect } from 'react';
+import React, { createContext, ReactNode, useEffect } from 'react';
 import io from 'socket.io-client';
 
 interface SocketProviderProps {
@@ -19,5 +19,9 @@ export const SocketProvider = ({ children }: SocketProviderProps) => {
   const socket = io('http://localhost:8000');
 
   const value = { socket };
-  return <SocketContext.Provider value={value}>{children}</SocketContext.Provider>;
+  return (
+    <SocketContext.Provider value={React.useMemo(() => ({ socket }), [socket])}>
+      {children}
+    </SocketContext.Provider>
+  );
 };

@@ -7,15 +7,15 @@ import { AiOutlinePhone, AiOutlineVideoCamera, AiOutlineExclamationCircle } from
 
 import AvatarIcon from '../../../../components/AvatarIcon';
 import ChatInput from '../ChatInput';
-import Message from '../Message';
 
+import MessageList from '../MessageList';
 import './style.scss';
 
 const ChatContainer = () => {
   const { currentConversation, dispatch } = useContext(ConversationContext);
+
   const { currentUser } = useContext(AuthContext);
   const { socket } = useContext(SocketContext);
-  const messageEndRef = useRef<HTMLDivElement>(null);
   const [messages, setMessages] = useState<any[]>([]);
   const [content, setContent] = useState('');
   const [friend, setFriend] = useState<any>(null);
@@ -45,17 +45,13 @@ const ChatContainer = () => {
           (member: any) => member.id !== newMessage.sender.id
         );
         setMessages([...messages, newMessage]);
+        socket.emit('send-message', { newMessage, recipient });
         setContent('');
         dispatch({ type: 'UPDATE_CONVERSATION', payload: { updatedConversation } });
-        socket.emit('send-message', { newMessage, recipient });
       } catch (error) {
         console.log(error);
       }
     }
-  };
-
-  const scrollToBottom = () => {
-    messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   useEffect(() => {
@@ -71,13 +67,20 @@ const ChatContainer = () => {
     socket.on('receive-message', (message: any) => {
       if (message.conversation === currentConversation?.id) {
         setMessages([...messages, message]);
+        // dispatch({
+        //   type: 'UPDATE_CONVERSATION',
+        //   payload: { updatedConversation: { ...currentConversation, lastMessage: message } },
+        // });
+      } else {
+        dispatch({
+          type: 'UPDATE_LAST_MESSAGE',
+          payload: {
+            message,
+          },
+        });
       }
     });
-  }, [currentConversation]);
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
+  });
 
   return (
     <>
@@ -95,16 +98,7 @@ const ChatContainer = () => {
             </div>
           </div>
           <hr />
-          <div className="message-list">
-            {messages.map((message: any) => {
-              return message.sender.id === currentUser?.id ? (
-                <Message right message={message} key={message._id} />
-              ) : (
-                <Message left message={message} key={message._id} />
-              );
-            })}
-            <div ref={messageEndRef} />
-          </div>
+          <MessageList messages={messages} />
           <ChatInput
             onContentChange={handleContentMessageChange}
             onSubmitChat={handleSubmitChat}

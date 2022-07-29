@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import './style.scss';
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
 import { BsDot } from 'react-icons/bs';
@@ -9,7 +9,8 @@ import conversationApi from '../../../../api/conversationApi';
 import { useNavigate } from 'react-router-dom';
 import { ConversationContext } from '../../../../contexts/ConversationContext/ConversationContext';
 
-const FriendList = () => {
+const FriendOnlineList = () => {
+  console.log('CPN FriendOnlineList');
   const { currentUser } = useContext(AuthContext);
   const { dispatch } = useContext(ConversationContext);
   const navigate = useNavigate();
@@ -48,4 +49,4 @@ const FriendList = () => {
   );
 };
 
-export default FriendList;
+export default FriendOnlineList;
