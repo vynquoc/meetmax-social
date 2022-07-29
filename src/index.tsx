@@ -13,21 +13,21 @@ import { NotificationProvider } from './contexts/NotificationContext/Notificatio
 import { ConversationProvider } from './contexts/ConversationContext/ConversationContext';
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
-  <AuthProvider>
-    <SocketProvider>
-      <NotificationProvider>
-        <PostListProvider>
-          <ConversationProvider>
-            <BrowserRouter>
+  <BrowserRouter>
+    <AuthProvider>
+      <SocketProvider>
+        <NotificationProvider>
+          <PostListProvider>
+            <ConversationProvider>
               <ModalProvider>
                 <App />
               </ModalProvider>
-            </BrowserRouter>
-          </ConversationProvider>
-        </PostListProvider>
-      </NotificationProvider>
-    </SocketProvider>
-  </AuthProvider>
+            </ConversationProvider>
+          </PostListProvider>
+        </NotificationProvider>
+      </SocketProvider>
+    </AuthProvider>
+  </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useContext, useEffect, useReducer } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import conversationApi from '../../api/conversationApi';
 import { AuthContext } from '../AuthContext';
 import { conversationReducer } from './reducers';
@@ -9,7 +10,7 @@ interface ConversationProviderProps {
 
 const DefaultData = {
   conversationList: [],
-  currentConversation: null,
+
   dispatch: () => null,
 };
 
@@ -27,8 +28,9 @@ export const ConversationProvider = ({ children }: ConversationProviderProps) =>
 
   useEffect(() => {
     getConversationList();
-  }, [currentUser, dispatch]);
-  const { conversationList, currentConversation } = state;
-  const value = { conversationList, currentConversation, dispatch };
+  }, [currentUser]);
+
+  const { conversationList } = state;
+  const value = { conversationList, dispatch };
   return <ConversationContext.Provider value={value}>{children}</ConversationContext.Provider>;
 };

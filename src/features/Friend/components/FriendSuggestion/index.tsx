@@ -16,7 +16,7 @@ const FriendSuggestion = () => {
     <div className="suggestion-container">
       <p>Suggestion</p>
       {suggestionList.map((user: any) => (
-        <div className="suggestion-user-container">
+        <div className="suggestion-user-container" key={user.id}>
           <img className="user-avatar" src={user.avatar} alt="avatar" />
           <div className="name">
             <NavLink to={`/profile/${user.username}`} className="user-name">

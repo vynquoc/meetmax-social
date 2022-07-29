@@ -6,7 +6,7 @@ import SearchBar from '../../../../components/SearchBar';
 import Conversation from '../Conversation';
 
 const ConversationList = () => {
-  const { conversationList, dispatch } = useContext(ConversationContext);
+  const { conversationList } = useContext(ConversationContext);
 
   return (
     <div className="conversation-list-container">

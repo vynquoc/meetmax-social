@@ -1,8 +1,9 @@
 import React, { useRef, useContext, useEffect } from 'react';
-
-import './style.scss';
-import Message from '../Message';
 import { AuthContext } from '../../../../contexts/AuthContext';
+import './style.scss';
+
+import Message from '../Message';
+
 const MessageList = ({ messages }: any) => {
   const messageEndRef = useRef<HTMLDivElement>(null);
   const { currentUser } = useContext(AuthContext);

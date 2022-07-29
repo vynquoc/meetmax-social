@@ -1,20 +1,19 @@
 import { useContext, useEffect, useState } from 'react';
 import moment from 'moment';
 import AvatarIcon from '../../../../components/AvatarIcon';
-import { useNavigate } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { AuthContext } from '../../../../contexts/AuthContext';
-import { ConversationContext } from '../../../../contexts/ConversationContext/ConversationContext';
+
 import './style.scss';
 
 const Conversation = ({ conversation }: any) => {
   const { currentUser } = useContext(AuthContext);
-  const { currentConversation, dispatch } = useContext(ConversationContext);
-  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams({});
+  const conversationId: any = searchParams.get('conversationId');
   const [friend, setFriend] = useState<any>(null);
 
   const handleSelectConversation = () => {
-    dispatch({ type: 'SET_CURRENT_CONVERSATION', payload: { conversation } });
-    navigate(`/messages?conversationId=${conversation.id}`);
+    setSearchParams({ conversationId: conversation.id });
   };
 
   useEffect(() => {
@@ -24,7 +23,7 @@ const Conversation = ({ conversation }: any) => {
 
   return (
     <div
-      className={'conversation ' + (currentConversation?.id === conversation?.id ? 'selected' : '')}
+      className={'conversation ' + (conversationId === conversation?.id ? 'selected' : '')}
       onClick={handleSelectConversation}
     >
       <div className="conversation-info">
@@ -33,7 +32,11 @@ const Conversation = ({ conversation }: any) => {
           <p className="conversation-info-name">{friend?.firstName + ' ' + friend?.lastName}</p>
           <p className="conversation-info-last-message">
             {conversation.lastMessage
-              ? conversation.lastMessage.content
+              ? `${
+                  currentUser?.username === conversation.lastMessage.sender.username
+                    ? 'You'
+                    : conversation.lastMessage.sender.username
+                } : ${conversation.lastMessage.content}`
               : `You and ${friend?.firstName + ' ' + friend?.lastName} are now connected`}
           </p>
         </div>

@@ -1,4 +1,5 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useMemo, useRef, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import messageApi from '../../../../api/messageApi';
 import { ConversationContext } from '../../../../contexts/ConversationContext/ConversationContext';
 import { SocketContext } from '../../../../contexts/SocketContext';
@@ -12,7 +13,14 @@ import MessageList from '../MessageList';
 import './style.scss';
 
 const ChatContainer = () => {
-  const { currentConversation, dispatch } = useContext(ConversationContext);
+  const { conversationList, dispatch } = useContext(ConversationContext);
+  const [searchParams] = useSearchParams({});
+  const conversationId: any = searchParams.get('conversationId');
+
+  const currentConversation = useMemo(
+    () => conversationList.find((con: any) => con.id === conversationId),
+    [conversationId, conversationList]
+  );
 
   const { currentUser } = useContext(AuthContext);
   const { socket } = useContext(SocketContext);
@@ -21,8 +29,9 @@ const ChatContainer = () => {
   const [friend, setFriend] = useState<any>(null);
 
   const getMessagesOfConversation = async () => {
+    console.log('refeteched');
     try {
-      const { messages }: any = await messageApi.getMessages(currentConversation.id);
+      const { messages }: any = await messageApi.getMessages(conversationId);
       setMessages(messages);
     } catch (error) {
       console.log(error);
@@ -38,7 +47,7 @@ const ChatContainer = () => {
     if (content) {
       try {
         const { newMessage, updatedConversation }: any = await messageApi.create({
-          conversationId: currentConversation.id,
+          conversationId: conversationId,
           content,
         });
         const recipient = currentConversation.members.find(
@@ -57,34 +66,26 @@ const ChatContainer = () => {
   useEffect(() => {
     const friend = currentConversation?.members.find((m: any) => m.id !== currentUser?.id);
     setFriend(friend);
-  }, [currentConversation]);
+  }, [conversationId, conversationList]);
 
   useEffect(() => {
-    currentConversation && getMessagesOfConversation();
-  }, [currentConversation]);
+    getMessagesOfConversation();
+  }, [conversationId]);
 
   useEffect(() => {
     socket.on('receive-message', (message: any) => {
-      if (message.conversation === currentConversation?.id) {
+      // console.log('Before', message.conversation, conversationId);
+      if (message.conversation === conversationId) {
+        console.log('After', message.conversation, conversationId);
         setMessages([...messages, message]);
-        // dispatch({
-        //   type: 'UPDATE_CONVERSATION',
-        //   payload: { updatedConversation: { ...currentConversation, lastMessage: message } },
-        // });
-      } else {
-        dispatch({
-          type: 'UPDATE_LAST_MESSAGE',
-          payload: {
-            message,
-          },
-        });
       }
+      dispatch({ type: 'UPDATE_LAST_MESSAGE', payload: { message } });
     });
   });
 
   return (
     <>
-      {currentConversation && (
+      {conversationId && (
         <div className="chat-container">
           <div className="chat-container-header">
             <div style={{ display: 'flex', alignItems: 'center' }}>

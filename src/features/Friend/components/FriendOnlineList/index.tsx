@@ -7,19 +7,17 @@ import { AuthContext } from '../../../../contexts/AuthContext';
 import SearchBar from '../../../../components/SearchBar';
 import conversationApi from '../../../../api/conversationApi';
 import { useNavigate } from 'react-router-dom';
-import { ConversationContext } from '../../../../contexts/ConversationContext/ConversationContext';
 
 const FriendOnlineList = () => {
   console.log('CPN FriendOnlineList');
   const { currentUser } = useContext(AuthContext);
-  const { dispatch } = useContext(ConversationContext);
+
   const navigate = useNavigate();
 
   const handleFriendClick = async (recipient: string) => {
     try {
       const { conversation }: any = await conversationApi.getConversation({ recipient });
       navigate(`/messages?conversationId=${conversation?.id}`);
-      dispatch({ type: 'SET_CURRENT_CONVERSATION', payload: { conversation } });
     } catch (error) {
       console.log(error);
     }
