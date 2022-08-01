@@ -1,8 +1,8 @@
 import './style.scss';
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 //contexts
-import { AuthContext } from '../../../../contexts/AuthContext';
+
 //components
 import Button from '../../../../components/Button';
 import TextInput from '../../../../components/TextInput';
@@ -11,6 +11,10 @@ import { FaGoogle, FaFacebookF } from 'react-icons/fa';
 import { FiAtSign } from 'react-icons/fi';
 import { BiLockAlt } from 'react-icons/bi';
 import authApi from '../../../../api/authApi';
+import { useDispatch } from 'react-redux';
+import { userLogin } from '../../../../store/actions/userActions';
+import { useSelector } from 'react-redux';
+import { RootStore } from '../../../../store/store';
 
 interface UserInfo {
   email: string;
@@ -24,32 +28,27 @@ const defaultFormFields: UserInfo = {
 
 const SignIn = () => {
   const [formFields, setFormFields] = useState<UserInfo>(defaultFormFields);
-  const authContext = useContext(AuthContext);
-  const { setUserToContext } = authContext;
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const currentUser = useSelector((state: RootStore) => state.user.currentUser);
 
   const handleFormFieldsChange = (event: React.FormEvent<HTMLInputElement>) => {
     const { name, value } = event.currentTarget;
     setFormFields({ ...formFields, [name]: value });
   };
 
-  const signIn = async () => {
+  const handleSubmit = () => {
     try {
-      const response: any = await authApi.signIn(formFields);
-      const { user, token } = response;
-
-      setUserToContext(user);
-      navigate('/');
-      localStorage.setItem('access_token', token);
+      dispatch<any>(userLogin(formFields.email, formFields.password));
     } catch (error) {
       console.log(error);
     }
   };
-
-  const handleSubmit = () => {
-    signIn();
-  };
-
+  useEffect(() => {
+    if (currentUser) {
+      navigate('/');
+    }
+  }, [currentUser]);
   return (
     <div className="auth-container">
       <h1>Sign In</h1>

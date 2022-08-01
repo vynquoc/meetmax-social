@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
+import { useSelector } from 'react-redux';
+import { RootStore } from '../../store/store';
 import './style.scss';
-import { AuthContext } from '../../contexts/AuthContext';
+
 import { NavLink } from 'react-router-dom';
 //component
 import SearchBar from '../SearchBar';
@@ -9,7 +10,7 @@ import AvatarIcon from '../AvatarIcon';
 import { BiUser } from 'react-icons/bi';
 
 const Header = () => {
-  const { currentUser } = useContext(AuthContext);
+  const currentUser = useSelector((state: RootStore) => state.user.currentUser);
 
   return (
     <div className="header-container">

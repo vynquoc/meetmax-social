@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import './style.scss';
-import { AuthContext } from '../../contexts/AuthContext';
+
 //icons
 import {
   BiSpreadsheet,
@@ -14,6 +14,8 @@ import {
 import { FiUsers } from 'react-icons/fi';
 //components
 import Tab from '../Tab';
+import { useDispatch } from 'react-redux';
+import { userLogout } from '../../store/actions/userActions';
 
 const tabs = [
   {
@@ -54,7 +56,7 @@ const tabs = [
 ];
 
 const SideBar = () => {
-  const { signOut } = useContext(AuthContext);
+  const dispatch = useDispatch();
   console.log('CPN SideBar');
   return (
     <div className="sidebar">
@@ -62,7 +64,12 @@ const SideBar = () => {
         {tabs.map((tab, index) => (
           <Tab key={index} icon={tab.icon} text={tab.text} path={tab.path} />
         ))}
-        <Tab icon={<BiLogOut />} text="Logout" onClick={signOut} path="/auth/sign-in" />
+        <Tab
+          icon={<BiLogOut />}
+          text="Logout"
+          onClick={() => dispatch<any>(userLogout())}
+          path="/auth/sign-in"
+        />
       </div>
     </div>
   );

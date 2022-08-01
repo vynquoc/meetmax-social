@@ -1,7 +1,5 @@
 import { createContext, ReactNode, useContext, useEffect, useReducer } from 'react';
-import postApi from '../../api/postApi';
-import { AuthContext } from '../AuthContext';
-import { SocketContext } from '../SocketContext';
+
 import { postListReducer } from './reducers';
 
 interface PostListProviderProps {

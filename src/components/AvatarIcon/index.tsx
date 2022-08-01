@@ -1,5 +1,6 @@
-import React, { useContext } from 'react';
-import { AuthContext } from '../../contexts/AuthContext';
+import { useSelector } from 'react-redux';
+
+import { RootStore } from '../../store/store';
 import './style.scss';
 
 interface AvatarIconProps {
@@ -8,8 +9,7 @@ interface AvatarIconProps {
 }
 
 const AvatarIcon = ({ showName, avatarUrl }: AvatarIconProps) => {
-  const authContext = useContext(AuthContext);
-  const { currentUser } = authContext;
+  const currentUser = useSelector((state: RootStore) => state.user.currentUser);
   return (
     <div className="avatar-container">
       {showName && (

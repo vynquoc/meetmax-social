@@ -1,18 +1,20 @@
 import { useContext } from 'react';
 import moment from 'moment';
+import { useDispatch } from 'react-redux';
+import { updateReadNotification } from '../../../../store/actions/notificationActions';
 
 import './style.scss';
 import { AiFillLike, AiFillMessage } from 'react-icons/ai';
 import { BsDot } from 'react-icons/bs';
 import AvatarIcon from '../../../../components/AvatarIcon';
-import { NotificationContext } from '../../../../contexts/NotificationContext/NotificationContext';
+
 import notificationApi from '../../../../api/notificationApi';
 import PostDetail from '../../../Post/components/PostDetail';
 import { ModalContext } from '../../../../contexts/ModalContext';
 
 const Notification = ({ notification }: any) => {
   const { createdBy, createdAt, content, type, isRead, id, url } = notification;
-  const { dispatch } = useContext(NotificationContext);
+  const dispatch = useDispatch();
   const { handleToggleModal } = useContext(ModalContext);
 
   const handleClick = async () => {
@@ -20,7 +22,7 @@ const Notification = ({ notification }: any) => {
     if (!isRead) {
       const { newNotification }: any = await notificationApi.update(id);
 
-      dispatch({ type: 'UPDATE_NOTIFICATION', payload: { notification: newNotification } });
+      dispatch<any>(updateReadNotification(newNotification));
     }
   };
   return (

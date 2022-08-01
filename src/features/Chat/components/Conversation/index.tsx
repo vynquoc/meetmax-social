@@ -1,13 +1,14 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import moment from 'moment';
 import AvatarIcon from '../../../../components/AvatarIcon';
 import { useSearchParams } from 'react-router-dom';
-import { AuthContext } from '../../../../contexts/AuthContext';
 
 import './style.scss';
+import { useSelector } from 'react-redux';
+import { RootStore } from '../../../../store/store';
 
 const Conversation = ({ conversation }: any) => {
-  const { currentUser } = useContext(AuthContext);
+  const currentUser = useSelector((state: RootStore) => state.user.currentUser);
   const [searchParams, setSearchParams] = useSearchParams({});
   const conversationId: any = searchParams.get('conversationId');
   const [friend, setFriend] = useState<any>(null);

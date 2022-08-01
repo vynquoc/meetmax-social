@@ -6,21 +6,23 @@ import notificationApi from '../../../../api/notificationApi';
 import commentApi from '../../../../api/commentApi';
 import postApi from '../../../../api/postApi';
 //context
-import { SocketContext } from '../../../../contexts/SocketContext';
+
 import { PostListContext } from '../../../../contexts/PostListContext/PostListContext';
-import { AuthContext } from '../../../../contexts/AuthContext';
+
 //components
 import { BiLike, BiComment, BiShare } from 'react-icons/bi';
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
 import AvatarIcon from '../../../../components/AvatarIcon';
 import CommentList from '../CommentList';
 import CommentInput from '../CommentInput';
+import { useSelector } from 'react-redux';
+import { RootStore } from '../../../../store/store';
 
 const Post = ({ post }: any) => {
-  const { socket } = useContext(SocketContext);
-  const { currentUser } = useContext(AuthContext);
+  const socket = useSelector((state: RootStore) => state.socket.socket);
+  const currentUser = useSelector((state: RootStore) => state.user.currentUser);
   const { dispatch } = useContext(PostListContext);
-  console.log(post);
+
   const [liked, setLiked] = useState(false);
   const { postedBy, likedBy, createdAt, photo, comments, id } = post;
   const [content, setContent] = useState('');

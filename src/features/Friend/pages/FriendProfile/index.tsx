@@ -3,7 +3,9 @@ import { useParams } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import userApi from '../../../../api/userApi';
 import friendRequestApi from '../../../../api/friendRequestApi';
-import { SocketContext } from '../../../../contexts/SocketContext';
+import { useSelector } from 'react-redux';
+import { RootStore } from '../../../../store/store';
+
 //components
 import Button from '../../../../components/Button';
 
@@ -11,7 +13,7 @@ const FriendPage = () => {
   const [userData, setUserData] = useState<any>({});
   const { isRecepient, isRequester, isFriend, user } = userData;
   const { username } = useParams();
-  const { socket } = useContext(SocketContext);
+  const socket = useSelector((state: RootStore) => state.socket.socket);
 
   const getUser = async () => {
     const response: any = await userApi.getUser(username);

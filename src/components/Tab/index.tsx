@@ -1,10 +1,12 @@
-import React, { useContext } from 'react';
+import { ReactNode } from 'react';
+import { useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
-import { NotificationContext } from '../../contexts/NotificationContext/NotificationContext';
+
+import { RootStore } from '../../store/store';
 import './style.scss';
 
 interface TabProps {
-  icon: React.ReactNode;
+  icon: ReactNode;
   text: string;
   path: string;
   onClick?: () => void;
@@ -12,7 +14,7 @@ interface TabProps {
 
 const Tab = ({ icon, text, onClick, path }: TabProps) => {
   const { pathname } = useLocation();
-  const { notificationList } = useContext(NotificationContext);
+  const notificationList = useSelector((state: RootStore) => state.notifications.notificationList);
 
   const count = notificationList.filter(
     (notification: any) => notification.isRead === false

@@ -1,7 +1,9 @@
 import { createContext, ReactNode, useContext, useEffect, useReducer } from 'react';
+import { useSelector } from 'react-redux';
 import notificationApi from '../../api/notificationApi';
+import { RootStore } from '../../store/store';
 import { AuthContext } from '../AuthContext';
-import { SocketContext } from '../SocketContext';
+
 import { notificationReducer } from './reducers';
 
 interface NotificationProviderProps {
@@ -18,7 +20,7 @@ export const NotificationContext = createContext<any>(DefaultData);
 export const NotificationProvider = ({ children }: NotificationProviderProps) => {
   const [state, dispatch] = useReducer(notificationReducer, DefaultData.notifications);
   const { currentUser } = useContext(AuthContext);
-  const { socket } = useContext(SocketContext);
+  const socket = useSelector((state: RootStore) => state.socket.socket);
 
   const getNotificationList = async () => {
     const { notificationList }: any = await notificationApi.getNotificationList();

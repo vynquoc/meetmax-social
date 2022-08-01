@@ -1,12 +1,14 @@
-import React, { useRef, useContext, useEffect } from 'react';
-import { AuthContext } from '../../../../contexts/AuthContext';
+import { useRef, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { RootStore } from '../../../../store/store';
+
 import './style.scss';
 
 import Message from '../Message';
 
 const MessageList = ({ messages }: any) => {
   const messageEndRef = useRef<HTMLDivElement>(null);
-  const { currentUser } = useContext(AuthContext);
+  const currentUser = useSelector((state: RootStore) => state.user.currentUser);
   const scrollToBottom = () => {
     messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };

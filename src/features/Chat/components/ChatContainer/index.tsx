@@ -2,8 +2,7 @@ import { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import messageApi from '../../../../api/messageApi';
 import { ConversationContext } from '../../../../contexts/ConversationContext/ConversationContext';
-import { SocketContext } from '../../../../contexts/SocketContext';
-import { AuthContext } from '../../../../contexts/AuthContext';
+
 import { AiOutlinePhone, AiOutlineVideoCamera, AiOutlineExclamationCircle } from 'react-icons/ai';
 
 import AvatarIcon from '../../../../components/AvatarIcon';
@@ -11,6 +10,8 @@ import ChatInput from '../ChatInput';
 
 import MessageList from '../MessageList';
 import './style.scss';
+import { useSelector } from 'react-redux';
+import { RootStore } from '../../../../store/store';
 
 const ChatContainer = () => {
   const { conversationList, dispatch } = useContext(ConversationContext);
@@ -22,14 +23,13 @@ const ChatContainer = () => {
     [conversationId, conversationList]
   );
 
-  const { currentUser } = useContext(AuthContext);
-  const { socket } = useContext(SocketContext);
+  const currentUser = useSelector((state: RootStore) => state.user.currentUser);
+  const socket = useSelector((state: RootStore) => state.socket.socket);
   const [messages, setMessages] = useState<any[]>([]);
   const [content, setContent] = useState('');
   const [friend, setFriend] = useState<any>(null);
 
   const getMessagesOfConversation = async () => {
-    console.log('refeteched');
     try {
       const { messages }: any = await messageApi.getMessages(conversationId);
       setMessages(messages);

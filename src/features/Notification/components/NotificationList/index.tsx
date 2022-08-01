@@ -1,16 +1,16 @@
-import React, { useContext, useEffect } from 'react';
 import './style.scss';
-import { NotificationContext } from '../../../../contexts/NotificationContext/NotificationContext';
-import { SocketContext } from '../../../../contexts/SocketContext';
-import Notification from '../Notification';
-const NotificationList = () => {
-  const { socket } = useContext(SocketContext);
-  const { notificationList, dispatch } = useContext(NotificationContext);
 
+import Notification from '../Notification';
+import { useSelector } from 'react-redux';
+import { RootStore } from '../../../../store/store';
+import { NotificationType } from '../../../../store/actionTypes/notificationActionTypes';
+
+const NotificationList = () => {
+  const notificationList = useSelector((state: RootStore) => state.notifications.notificationList);
   return (
     <div>
       <hr />
-      {notificationList.map((notification: any) => {
+      {notificationList.map((notification: NotificationType) => {
         return <Notification key={notification.id} notification={notification} />;
       })}
     </div>

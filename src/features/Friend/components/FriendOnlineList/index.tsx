@@ -1,16 +1,16 @@
-import { useContext } from 'react';
 import './style.scss';
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
 import { BsDot } from 'react-icons/bs';
-import { AuthContext } from '../../../../contexts/AuthContext';
+import { useSelector } from 'react-redux';
+import { RootStore } from '../../../../store/store';
+
 //components
 import SearchBar from '../../../../components/SearchBar';
 import conversationApi from '../../../../api/conversationApi';
 import { useNavigate } from 'react-router-dom';
 
 const FriendOnlineList = () => {
-  console.log('CPN FriendOnlineList');
-  const { currentUser } = useContext(AuthContext);
+  const currentUser = useSelector((state: RootStore) => state.user.currentUser);
 
   const navigate = useNavigate();
 

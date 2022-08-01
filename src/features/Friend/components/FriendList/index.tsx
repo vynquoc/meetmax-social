@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
-import { AuthContext } from '../../../../contexts/AuthContext';
+import { useSelector } from 'react-redux';
+import { RootStore } from '../../../../store/store';
+
 import './style.scss';
 import FriendItem from '../FriendItem';
 
 const FriendList = () => {
-  const { currentUser } = useContext(AuthContext);
+  const currentUser = useSelector((state: RootStore) => state.user.currentUser);
   return (
     <div className="friend-list">
       {currentUser?.friends.map((friend: any) => (

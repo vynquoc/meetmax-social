@@ -2,13 +2,14 @@ import moment from 'moment';
 import React, { useContext, useEffect, useState } from 'react';
 import notificationApi from '../../../../api/notificationApi';
 import commentApi from '../../../../api/commentApi';
+import { useSelector } from 'react-redux';
+import { RootStore } from '../../../../store/store';
 
 import postApi from '../../../../api/postApi';
 import AvatarIcon from '../../../../components/AvatarIcon';
 import CommentInput from '../CommentInput';
 import CommentList from '../CommentList';
 import './style.scss';
-import { SocketContext } from '../../../../contexts/SocketContext';
 
 interface PostDetailProps {
   postId: string;
@@ -17,7 +18,7 @@ interface PostDetailProps {
 const PostDetail = ({ postId }: PostDetailProps) => {
   const [post, setPost] = useState<any>(null);
   const [content, setContent] = useState('');
-  const { socket } = useContext(SocketContext);
+  const socket = useSelector((state: RootStore) => state.socket.socket);
   const [commentList, setCommentList] = useState([]);
 
   const getPostDetail = async () => {
