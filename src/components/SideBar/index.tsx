@@ -57,7 +57,6 @@ const tabs = [
 
 const SideBar = () => {
   const dispatch = useDispatch();
-  console.log('CPN SideBar');
   return (
     <div className="sidebar">
       <div className="tabs-container">

@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
+import { NotificationType } from '../../store/actionTypes/notificationActionTypes';
 
 import { RootStore } from '../../store/store';
 import './style.scss';
@@ -17,7 +18,7 @@ const Tab = ({ icon, text, onClick, path }: TabProps) => {
   const notificationList = useSelector((state: RootStore) => state.notifications.notificationList);
 
   const count = notificationList.filter(
-    (notification: any) => notification.isRead === false
+    (notification: NotificationType) => notification.isRead === false
   ).length;
 
   return (

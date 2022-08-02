@@ -1,8 +1,12 @@
+import { MessageType } from "./conversationActionTypes";
+
 export const GET_NOTIFICATION_SUCCESS = "GET_NOTIFICATION_SUCCESS";
 export const GET_NOTIFICATION_START = "GET_NOTIFICATION_START";
 export const GET_NOTIFICATION_FAILED = "GET_NOTIFICATION_FAILED";
 export const UPDATE_READ_NOTIFICATION = "UPDATE_READ_NOTIFICATION"
 export const ADD_NOTIFICATION = "ADD_NOTIFICATION"
+export const UPDATE_LAST_MESSAGE = "UPDATE_LAST_MESSAGE"
+
 
 export type NotificationType = {
     id: string,
@@ -39,4 +43,6 @@ export interface addNotification {
   payload: NotificationType
 }
 
-export type NotificationDispatchTypes = getNotificationStart | getNotificationSuccess | getNotificationFailed | updateReadNotification | addNotification
+
+
+export type NotificationDispatchTypes = getNotificationStart | getNotificationSuccess | getNotificationFailed | updateReadNotification | addNotification 

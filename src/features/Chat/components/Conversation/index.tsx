@@ -1,30 +1,35 @@
 import { useEffect, useState } from 'react';
 import moment from 'moment';
 import AvatarIcon from '../../../../components/AvatarIcon';
-import { useSearchParams } from 'react-router-dom';
 
 import './style.scss';
 import { useSelector } from 'react-redux';
 import { RootStore } from '../../../../store/store';
+import { useDispatch } from 'react-redux';
+import { setCurrentConversationId } from '../../../../store/actions/conversationActions';
 
 const Conversation = ({ conversation }: any) => {
   const currentUser = useSelector((state: RootStore) => state.user.currentUser);
-  const [searchParams, setSearchParams] = useSearchParams({});
-  const conversationId: any = searchParams.get('conversationId');
+  const currentConversationId = useSelector(
+    (state: RootStore) => state.conversations.currentConversationId
+  );
+
+  const dispatch = useDispatch();
+
   const [friend, setFriend] = useState<any>(null);
 
   const handleSelectConversation = () => {
-    setSearchParams({ conversationId: conversation.id });
+    dispatch<any>(setCurrentConversationId(conversation.id));
   };
 
   useEffect(() => {
     const friend = conversation.members.find((m: any) => m.id !== currentUser?.id);
     setFriend(friend);
-  }, []);
+  }, [conversation]);
 
   return (
     <div
-      className={'conversation ' + (conversationId === conversation?.id ? 'selected' : '')}
+      className={'conversation ' + (currentConversationId === conversation?.id ? 'selected' : '')}
       onClick={handleSelectConversation}
     >
       <div className="conversation-info">
@@ -47,7 +52,7 @@ const Conversation = ({ conversation }: any) => {
               ? moment(conversation.lastMessage.createdAt).format('LT')
               : ''}
           </span>
-          {/* <span className="conversation-info-noti">1</span> */}
+          {conversation.seen === false && <span className="conversation-info-noti">1</span>}
         </div>
       </div>
     </div>

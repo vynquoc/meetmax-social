@@ -13,6 +13,9 @@ const conversationApi = {
     },
     getConversation: (data: conversationData) => {
         return axiosClient.post("/conversation/get-conversation", data)
+    },
+    updateReadConversation: (id: string)=> {
+        return axiosClient.patch(`/conversation/${id}`, {readLastMessage: true})
     }
 }
 

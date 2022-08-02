@@ -1,34 +1,24 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 //providers
-
-import { AuthProvider } from './contexts/AuthContext';
 import { ModalProvider } from './contexts/ModalContext';
-
 import { PostListProvider } from './contexts/PostListContext/PostListContext';
-import { NotificationProvider } from './contexts/NotificationContext/NotificationContext';
-import { ConversationProvider } from './contexts/ConversationContext/ConversationContext';
 import { Provider } from 'react-redux';
 import Store from './store/store';
+
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+
 root.render(
   <Provider store={Store}>
     <BrowserRouter>
-      <AuthProvider>
-        <NotificationProvider>
-          <PostListProvider>
-            <ConversationProvider>
-              <ModalProvider>
-                <App />
-              </ModalProvider>
-            </ConversationProvider>
-          </PostListProvider>
-        </NotificationProvider>
-      </AuthProvider>
+      <PostListProvider>
+        <ModalProvider>
+          <App />
+        </ModalProvider>
+      </PostListProvider>
     </BrowserRouter>
   </Provider>
 );

@@ -3,21 +3,31 @@ import { BiDotsHorizontalRounded } from 'react-icons/bi';
 import { BsDot } from 'react-icons/bs';
 import { useSelector } from 'react-redux';
 import { RootStore } from '../../../../store/store';
+import conversationApi from '../../../../api/conversationApi';
+import { useDispatch } from 'react-redux';
+import {
+  addNewConversation,
+  setCurrentConversationId,
+} from '../../../../store/actions/conversationActions';
+import { useNavigate } from 'react-router-dom';
+import { ConversationType } from '../../../../store/actionTypes/conversationActionTypes';
 
 //components
 import SearchBar from '../../../../components/SearchBar';
-import conversationApi from '../../../../api/conversationApi';
-import { useNavigate } from 'react-router-dom';
 
 const FriendOnlineList = () => {
   const currentUser = useSelector((state: RootStore) => state.user.currentUser);
-
+  const conversationList = useSelector((state: RootStore) => state.conversations.conversationList);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const handleFriendClick = async (recipient: string) => {
     try {
       const { conversation }: any = await conversationApi.getConversation({ recipient });
-      navigate(`/messages?conversationId=${conversation?.id}`);
+      dispatch<any>(setCurrentConversationId(conversation.id));
+      if (!conversationList.find((con: ConversationType) => con.id === conversation.id)) {
+        dispatch<any>(addNewConversation(conversation));
+      }
+      navigate('/messages');
     } catch (error) {
       console.log(error);
     }

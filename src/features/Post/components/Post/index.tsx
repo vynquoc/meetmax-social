@@ -68,13 +68,12 @@ const Post = ({ post }: any) => {
         if (response.newComment?.commentBy?.id !== post?.postedBy?.id) {
           const { newNotification }: any = await notificationApi.create({
             url: post.id,
-            content: 'has comment on your post',
+            content: 'commented on your post',
             recipient: post.postedBy.id,
             type: 'comment',
           });
           socket.emit('send-comment-notification', newNotification);
         }
-
         setContent('');
         setCommentList(newCommentList);
         setCommentCount(commentCount + 1);
@@ -92,6 +91,7 @@ const Post = ({ post }: any) => {
       setLiked(false);
     }
   }, []);
+
   return (
     <div className="post-container">
       <div className="post-header">

@@ -15,6 +15,7 @@ import { getNotificationList } from './store/actions/notificationActions';
 import SocketClient from './SocketClient';
 import { useSelector } from 'react-redux';
 import { RootStore } from './store/store';
+import { getConversationList } from './store/actions/conversationActions';
 
 //components
 
@@ -29,6 +30,7 @@ function App() {
     if (token) {
       dispatch<any>(userFromToken());
       dispatch<any>(getNotificationList());
+      dispatch<any>(getConversationList());
     }
 
     const socket = io('http://localhost:8000');

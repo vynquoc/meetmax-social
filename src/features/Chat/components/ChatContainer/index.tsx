@@ -1,7 +1,8 @@
-import { useContext, useEffect, useMemo, useRef, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+
 import messageApi from '../../../../api/messageApi';
-import { ConversationContext } from '../../../../contexts/ConversationContext/ConversationContext';
+
+import { useDispatch } from 'react-redux';
 
 import { AiOutlinePhone, AiOutlineVideoCamera, AiOutlineExclamationCircle } from 'react-icons/ai';
 
@@ -12,26 +13,29 @@ import MessageList from '../MessageList';
 import './style.scss';
 import { useSelector } from 'react-redux';
 import { RootStore } from '../../../../store/store';
+import {
+  ConversationType,
+  MessageType,
+} from '../../../../store/actionTypes/conversationActionTypes';
+import { updateLastMessage } from '../../../../store/actions/conversationActions';
 
-const ChatContainer = () => {
-  const { conversationList, dispatch } = useContext(ConversationContext);
-  const [searchParams] = useSearchParams({});
-  const conversationId: any = searchParams.get('conversationId');
+interface ChatContainerProps {
+  currentConversation: ConversationType;
+}
 
-  const currentConversation = useMemo(
-    () => conversationList.find((con: any) => con.id === conversationId),
-    [conversationId, conversationList]
-  );
+const ChatContainer = ({ currentConversation }: ChatContainerProps) => {
+  const dispatch = useDispatch();
 
   const currentUser = useSelector((state: RootStore) => state.user.currentUser);
   const socket = useSelector((state: RootStore) => state.socket.socket);
-  const [messages, setMessages] = useState<any[]>([]);
+
+  const [messages, setMessages] = useState<MessageType[]>([]);
   const [content, setContent] = useState('');
   const [friend, setFriend] = useState<any>(null);
 
   const getMessagesOfConversation = async () => {
     try {
-      const { messages }: any = await messageApi.getMessages(conversationId);
+      const { messages }: any = await messageApi.getMessages(currentConversation.id);
       setMessages(messages);
     } catch (error) {
       console.log(error);
@@ -46,17 +50,17 @@ const ChatContainer = () => {
   const handleSubmitChat = async () => {
     if (content) {
       try {
-        const { newMessage, updatedConversation }: any = await messageApi.create({
-          conversationId: conversationId,
+        const { newMessage }: any = await messageApi.create({
+          conversationId: currentConversation.id,
           content,
         });
-        const recipient = currentConversation.members.find(
+        const recipient = currentConversation?.members.find(
           (member: any) => member.id !== newMessage.sender.id
         );
         setMessages([...messages, newMessage]);
         socket.emit('send-message', { newMessage, recipient });
         setContent('');
-        dispatch({ type: 'UPDATE_CONVERSATION', payload: { updatedConversation } });
+        dispatch<any>(updateLastMessage(newMessage));
       } catch (error) {
         console.log(error);
       }
@@ -66,26 +70,15 @@ const ChatContainer = () => {
   useEffect(() => {
     const friend = currentConversation?.members.find((m: any) => m.id !== currentUser?.id);
     setFriend(friend);
-  }, [conversationId, conversationList]);
+  }, [currentConversation]);
 
   useEffect(() => {
     getMessagesOfConversation();
-  }, [conversationId]);
-
-  useEffect(() => {
-    socket.on('receive-message', (message: any) => {
-      // console.log('Before', message.conversation, conversationId);
-      if (message.conversation === conversationId) {
-        console.log('After', message.conversation, conversationId);
-        setMessages([...messages, message]);
-      }
-      dispatch({ type: 'UPDATE_LAST_MESSAGE', payload: { message } });
-    });
-  });
+  }, [currentConversation]);
 
   return (
     <>
-      {conversationId && (
+      {currentConversation && (
         <div className="chat-container">
           <div className="chat-container-header">
             <div style={{ display: 'flex', alignItems: 'center' }}>
