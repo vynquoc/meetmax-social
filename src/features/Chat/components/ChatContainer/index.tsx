@@ -1,23 +1,19 @@
 import { useEffect, useState } from 'react';
-
+import './style.scss';
 import messageApi from '../../../../api/messageApi';
 
-import { useDispatch } from 'react-redux';
-
-import { AiOutlinePhone, AiOutlineVideoCamera, AiOutlineExclamationCircle } from 'react-icons/ai';
-
-import AvatarIcon from '../../../../components/AvatarIcon';
-import ChatInput from '../ChatInput';
-
-import MessageList from '../MessageList';
-import './style.scss';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootStore } from '../../../../store/store';
+import { updateLastMessage } from '../../../../store/actions/conversationActions';
 import {
   ConversationType,
   MessageType,
 } from '../../../../store/actionTypes/conversationActionTypes';
-import { updateLastMessage } from '../../../../store/actions/conversationActions';
+
+import { AiOutlinePhone, AiOutlineVideoCamera, AiOutlineExclamationCircle } from 'react-icons/ai';
+import AvatarIcon from '../../../../components/AvatarIcon';
+import ChatInput from '../ChatInput';
+import MessageList from '../MessageList';
 
 interface ChatContainerProps {
   currentConversation: ConversationType;

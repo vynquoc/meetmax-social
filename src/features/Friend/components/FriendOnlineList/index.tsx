@@ -20,6 +20,7 @@ const FriendOnlineList = () => {
   const conversationList = useSelector((state: RootStore) => state.conversations.conversationList);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const handleFriendClick = async (recipient: string) => {
     try {
       const { conversation }: any = await conversationApi.getConversation({ recipient });
